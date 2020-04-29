@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Library</title>
+</head>
+<body class="bg-secondary">
+    <div class="container d-flex flex-column mt-4">
+        <h1 class="text-center">Jake's Library</h1>
+        <form class="mb-4 hide">
+            <div class="form-group">
+                <label for="author" class="text-light">Book Author:</label>
+                <input type="text" class="form-control" id="author">
+            </div>
+            <div class="form-group">
+                <label for="title" class="text-light">Book Title:</label>
+                <input type="text" class="form-control" id="title">
+            </div>
+            <div class="form-group">
+                <label for="numOfPages" class="text-light">Number of Pages:</label>
+                <input type="number" class="form-control" id="numOfPages">
+            </div>
+            <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="read">
+                <label class="form-check-label text-light" for="read">Read?</label>
+            </div>
+            <div class="add-to-library-hide-btn d-flex justify-content-between">
+                <button type="button" class="btn btn-dark btn-sm" id="addToLibrary">ADD TO LIBRARY</button>
+                <button type="button" class="btn btn-info btn-sm" id="hideForm">HIDE FORM</button>
+            </div>
+        </form>
+        <div class="book-list">
+            <table class="table table-dark table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Book Author</th>
+                        <th scope="col">Book Title</th>
+                        <th scope="col">Number of Pages</th>
+                        <th scope="col">Read?</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <div class="add-new-book">
+            <button type="button" class="btn btn-dark btn-block" id="addNewBook">ADD A NEW BOOK</button>
+        </div>
+    </div>
+    <script src="/main.js"></script>
+</body>
+</html>
