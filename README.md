@@ -1,8 +1,8 @@
-# Library (LocalStorage)
+# Library (LocalStorage + Firebase to be added)
 
 > ## From The Odin Project's [curriculum](https://www.theodinproject.com/courses/javascript/lessons/library)
 
-> - [Live demo](https://igorashs.github.io/library/) :shipit:
+> - [Live demo](https://jakejosephcs.github.io/library/) :shipit:
 
 ## Assignment
 > Create a library where books are stored in localStorage or/and Firebase
