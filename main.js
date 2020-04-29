@@ -35,12 +35,21 @@ class Books{
 
 function addBookToList(book) {
     const tableBody = document.querySelector('tbody');
+    let readStatus;
+    let successOrDanger;
+    if (book.read) {
+        readStatus = "YES";
+        successOrDanger = "success";
+    } else {
+        readStatus = "NO";
+        successOrDanger = 'danger';
+    }
     tableBody.innerHTML += `
         <td>${book.author}</td>
         <td>${book.title}</td>
         <td>${book.pages}</td>
-        <td><button type="button" class="read read${book.id} btn btn-success btn-sm">YES</button></td>
-        <td><button type="button" class="read read${book.id} btn btn-warning btn-sm">X</button></td>
+        <td><button type="button" class="change${book.id} btn btn-${successOrDanger} btn-sm">${readStatus}</button></td>
+        <td><button type="button" class="del${book.id} btn btn-warning btn-sm">X</button></td>
     `
 }
 
@@ -69,6 +78,60 @@ addToLibraryBtn.addEventListener('click', () => {
 
 })
 
+function changeReadStatus(index) {
+    bookList.forEach(book => {
+        if (book.id == index.slice(6)) toggleReadStatus(index)
+    })
+}
+
+function toggleReadStatus(index){
+    let readStatusBtn = document.querySelector(`.${index}`);
+    if (readStatusBtn.classList.contains('btn-success')) {
+        readStatusBtn.classList.remove('btn-success');
+        readStatusBtn.classList.add('btn-danger');
+        readStatusBtn.textContent = 'NO';
+        bookList[index.slice(6)-1].read = false;
+    } else {
+        readStatusBtn.classList.remove('btn-danger');
+        readStatusBtn.classList.add('btn-success');
+        readStatusBtn.textContent = 'YES';
+        bookList[index.slice(6)-1].read = true;
+    }
+    
+}
+
+function deleteBookEntry(index){
+    bookList.forEach(book => {
+        if (book.id == index.slice(3)){
+            bookList.splice(index.slice(3)-1, 1)
+        }
+    })
+    
+}
+
+function refreshBookList(){
+    const tableBody = document.querySelector('tbody');
+    tableBody.innerHTML = "";
+    let readStatus;
+    let successOrDanger;
+    bookList.forEach(book => {
+        if (book.read) {
+            readStatus = "YES";
+            successOrDanger = "success";
+        } else {
+            readStatus = "NO";
+            successOrDanger = 'danger';
+        }
+        tableBody.innerHTML += `
+            <td>${book.author}</td>
+            <td>${book.title}</td>
+            <td>${book.pages}</td>
+            <td><button type="button" class="change${book.id} btn btn-${successOrDanger} btn-sm">${readStatus}</button></td>
+            <td><button type="button" class="del${book.id} btn btn-warning btn-sm">X</button></td>
+        `
+    })
+}
+
 // EVENT: Hide add new book form
 hideFormBtn.addEventListener('click', () => {
     form.classList.toggle('hide');
@@ -79,9 +142,13 @@ addNewBookBtn.addEventListener('click', () => {
     form.classList.toggle('hide');
 })
 
-// EVENT: Change read status of book
-document.querySelector('.book-list').addEventListener('click', (e) => {
-    console.log(e.target);
-})
 
-// EVENT: Delete book from reading list
+// EVENT: Delete or Change Status of book from reading list
+document.querySelector('.book-list').addEventListener('click', (e) => {
+    if (e.target.classList[2] == 'btn-warning') {
+        deleteBookEntry(e.target.classList[0]);
+        refreshBookList()
+    }else {
+        changeReadStatus(e.target.classList[0])
+    }
+})
